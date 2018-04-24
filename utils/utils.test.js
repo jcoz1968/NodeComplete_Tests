@@ -1,15 +1,38 @@
 const expect = require('expect');
 const utils = require('./utils');
 
+describe('Utils', () => {
 
-it('should add two numbers', () => {
-  var result = utils.add(33, 11);
-  expect(result).toBeA('number').toBe(44);
-});
+  describe('#add', () => {
+    it('should add two numbers', () => {
+      var result = utils.add(33, 11);
+      expect(result).toBeA('number').toBe(44);
+    });
 
-it('should get square input', () => {
-  var res = utils.square(5);
-  expect(res).toBeA('number').toBe(25);
+    it('should async add 2 numbers', (done) => {
+      utils.asyncAdd(4, 4, (sum) => {
+        expect(sum).toBe(8).toBeA('number');
+        done();
+      });
+    });
+
+  });
+
+  describe('#square', () => {
+
+    it('should get square input', () => {
+      var res = utils.square(5);
+      expect(res).toBeA('number').toBe(25);
+    });
+
+    it('should get square input', (done) => {
+      utils.asyncSquare(4, (result) => {
+        expect(result).toBe(16).toBeA('number');
+        done();
+      });
+    });
+  });
+
 });
 
 // should verify first and last names are set.
@@ -24,19 +47,6 @@ it('should set firstName and lastName', () => {
   });
 });
 
-it('should async add 2 numbers', (done) => {
-  utils.asyncAdd(4, 4, (sum) => {
-    expect(sum).toBe(8).toBeA('number');
-    done();
-  });
-});
-
-it('should get square input', (done) => {
-  utils.asyncSquare(4, (result) => {
-    expect(result).toBe(16).toBeA('number');
-    done();
-  });
-});
 
 
 // it('should expect some values', () => {
